@@ -1,0 +1,16 @@
+language: python
+
+cache: pip
+
+python:
+  - "3.6"
+
+install:
+  - pip install poetry codecov
+  - poetry install
+
+script:
+  - make ci
+
+after_success:
+  - codecov
