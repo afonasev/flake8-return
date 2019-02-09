@@ -18,9 +18,9 @@ pip install flake8-return
 
 ## Errors
 
-* R501 you shouldn\`t add None at any return, if function havn\`t return value except None
-* R502 you should add explicite value at every return, if function have not None return value
-* R503 you should add explicite return at end of the function, if function have not None return value
+* R501 you shouldn\`t add None at any return if function havn\`t return value except None
+* R502 you should add explicite value at every return if function have return value except None
+* R503 you should add explicite return at end of the function if function have return value except None
 
 ## License
 

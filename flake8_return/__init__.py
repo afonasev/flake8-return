@@ -3,13 +3,13 @@ from typing import List
 
 from flake8_plugin_utils import Error, Plugin, Visitor
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 
 class UnnecessaryReturnNone(Error):
     code = 'R501'
     message = (
-        'you shouldn`t add None at any return, '
+        'you shouldn`t add None at any return '
         'if function havn`t return value except None'
     )
 
@@ -17,16 +17,16 @@ class UnnecessaryReturnNone(Error):
 class ImpliciteReturnValue(Error):
     code = 'R502'
     message = (
-        'you should add explicite value at every return, '
-        'if function have not None return value'
+        'you should add explicite value at every return '
+        'if function have return value except None'
     )
 
 
 class ImpliciteReturn(Error):
     code = 'R503'
     message = (
-        'you should add explicite return at end of the function, '
-        'if function have not None return value'
+        'you should add explicite return at end of the function '
+        'if function have return value except None'
     )
 
 
