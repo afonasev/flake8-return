@@ -31,3 +31,7 @@ MIT
 ### 0.1.0 - 2019.02.10
 
 * initial
+
+### 0.1.1 - 2019.02.10
+
+* fix error messages
