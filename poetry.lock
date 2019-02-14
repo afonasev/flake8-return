@@ -208,7 +208,7 @@ version = "0.1.0"
 flake8 = "*"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Package provide base classes and utils for flake8 plugin writing"
 name = "flake8-plugin-utils"
 optional = false
@@ -461,7 +461,7 @@ python-versions = "*"
 version = "1.11.1"
 
 [metadata]
-content-hash = "a55042ce61c1b84dc84ebe682247de49888c6d2cab2a1b8f95d202b2a774f6b5"
+content-hash = "1d2d6612634937f55fd03f87a39fc09da97839449e75354f003cc802134e36ba"
 python-versions = "^3.6"
 
 [metadata.hashes]
