@@ -61,6 +61,13 @@ def x(y):
         return
     return None  # noqa:{UnnecessaryReturnNone.code}
     """,
+        # raise as last return
+        f"""
+def x(y):
+    if not y:
+        return 1
+    raise Exception
+    """,
     ),
 )
 def test_error_not_exists(tmpdir, src):

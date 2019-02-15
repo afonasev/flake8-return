@@ -3,7 +3,7 @@ from typing import List
 
 from flake8_plugin_utils import Error, Plugin, Visitor
 
-__version__ = '0.1.1'
+__version__ = '0.2.0'
 
 
 class UnnecessaryReturnNone(Error):
@@ -67,7 +67,7 @@ class ReturnVisitor(Visitor):
             for node in without_value_returns:
                 self.error_from_node(ImplicitReturnValue, node)
 
-            if not isinstance(last_node, ast.Return):
+            if not isinstance(last_node, (ast.Return, ast.Raise)):
                 self.error_from_node(ImplicitReturn, last_node)
 
         else:

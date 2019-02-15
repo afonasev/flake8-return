@@ -28,10 +28,16 @@ MIT
 
 ## Change Log
 
-### 0.1.0 - 2019.02.10
+### 0.2.0 - 2019.02.15
 
-* initial
+* fix explicit/implicit
+* add flake8-plugin-utils as dependency
+* allow raise as last function return
 
 ### 0.1.1 - 2019.02.10
 
 * fix error messages
+
+### 0.1.0 - 2019.02.10
+
+* initial
