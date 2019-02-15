@@ -2,8 +2,8 @@ import pytest
 from flake8_plugin_utils import get_error
 
 from flake8_return import (
-    ImpliciteReturn,
-    ImpliciteReturnValue,
+    ImplicitReturn,
+    ImplicitReturnValue,
     ReturnPlugin,
     UnnecessaryReturnNone,
 )
@@ -52,7 +52,7 @@ def x(y):
         f"""
 def x(y):
     if not y:
-        return  # noqa:{ImpliciteReturnValue.code}
+        return  # noqa:{ImplicitReturnValue.code}
     return 1
     """,
         f"""
@@ -78,8 +78,8 @@ def x(y):
     """,
     ),
 )
-def test_implicite_return_value(tmpdir, src):
-    _assert_error(tmpdir, src, ImpliciteReturnValue)
+def test_implicit_return_value(tmpdir, src):
+    _assert_error(tmpdir, src, ImplicitReturnValue)
 
 
 @pytest.mark.parametrize(
@@ -107,8 +107,8 @@ def x(y):
     """,
     ),
 )
-def test_implicite_return(tmpdir, src):
-    _assert_error(tmpdir, src, ImpliciteReturn)
+def test_implicit_return(tmpdir, src):
+    _assert_error(tmpdir, src, ImplicitReturn)
 
 
 def _assert_error(tmpdir, src, error):

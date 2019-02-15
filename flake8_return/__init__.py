@@ -14,18 +14,18 @@ class UnnecessaryReturnNone(Error):
     )
 
 
-class ImpliciteReturnValue(Error):
+class ImplicitReturnValue(Error):
     code = 'R502'
     message = (
-        'you should add explicite value at every return '
+        'you should add explicit value at every return '
         'if function have return value except None'
     )
 
 
-class ImpliciteReturn(Error):
+class ImplicitReturn(Error):
     code = 'R503'
     message = (
-        'you should add explicite return at end of the function '
+        'you should add explicit return at end of the function '
         'if function have return value except None'
     )
 
@@ -65,10 +65,10 @@ class ReturnVisitor(Visitor):
 
         if result_exists:
             for node in without_value_returns:
-                self.error_from_node(ImpliciteReturnValue, node)
+                self.error_from_node(ImplicitReturnValue, node)
 
             if not isinstance(last_node, ast.Return):
-                self.error_from_node(ImpliciteReturn, last_node)
+                self.error_from_node(ImplicitReturn, last_node)
 
         else:
             for node in with_none_returns:
