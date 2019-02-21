@@ -1,12 +1,10 @@
-from textwrap import dedent
-
 import pytest
-from flake8_plugin_utils import get_error
+from flake8_plugin_utils import assert_error, assert_not_error
 
 from flake8_return import (
     ImplicitReturn,
     ImplicitReturnValue,
-    ReturnPlugin,
+    ReturnVisitor,
     UnnecessaryReturnNone,
 )
 
@@ -90,19 +88,6 @@ error_not_exists = (
         def inner():
             return 1
     """,
-    # noqa
-    f"""
-    def x(y):
-        if not y:
-            return  # noqa:{ImplicitReturnValue.code}
-        return 1
-    """,
-    f"""
-    def x(y):
-        if not y:
-            return
-        return None  # noqa:{UnnecessaryReturnNone.code}
-    """,
     # raise as last return
     """
     def x(y):
@@ -122,10 +107,8 @@ error_not_exists = (
 
 
 @pytest.mark.parametrize('src', error_not_exists, ids=_ids(error_not_exists))
-def test_error_not_exists(tmpdir, src):
-    src = dedent(src)
-    error_msg = get_error(ReturnPlugin, tmpdir, src)
-    assert not error_msg, f'Error "{error_msg}" found in\n{src}'
+def test_error_not_exists(src):
+    assert_not_error(ReturnVisitor, src)
 
 
 implicit_return_value = (
@@ -141,8 +124,8 @@ implicit_return_value = (
 @pytest.mark.parametrize(
     'src', implicit_return_value, ids=_ids(implicit_return_value)
 )
-def test_implicit_return_value(tmpdir, src):
-    _assert_error(tmpdir, src, ImplicitReturnValue)
+def test_implicit_return_value(src):
+    assert_error(ReturnVisitor, src, ImplicitReturnValue)
 
 
 unnecessary_return_none = (
@@ -158,8 +141,8 @@ unnecessary_return_none = (
 @pytest.mark.parametrize(
     'src', unnecessary_return_none, ids=_ids(unnecessary_return_none)
 )
-def test_unnecessary_return_none(tmpdir, src):
-    _assert_error(tmpdir, src, UnnecessaryReturnNone)
+def test_unnecessary_return_none(src):
+    assert_error(ReturnVisitor, src, UnnecessaryReturnNone)
 
 
 implicit_return = (
@@ -195,12 +178,5 @@ implicit_return = (
 
 
 @pytest.mark.parametrize('src', implicit_return, ids=_ids(implicit_return))
-def test_implicit_return(tmpdir, src):
-    _assert_error(tmpdir, src, ImplicitReturn)
-
-
-def _assert_error(tmpdir, src, error):
-    src = dedent(src)
-    error_msg = get_error(ReturnPlugin, tmpdir, src)
-    assert error_msg, f'Error "{error.message}" not found in\n{src}'
-    assert error_msg.endswith(error.message)
+def test_implicit_return(src):
+    assert_error(ReturnVisitor, src, ImplicitReturn)
