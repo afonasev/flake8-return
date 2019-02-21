@@ -33,6 +33,7 @@ MIT
 * fix explicit/implicit
 * add flake8-plugin-utils as dependency
 * allow raise as last function return
+* allow no return as last line in while block
 
 ### 0.1.1 - 2019.02.10
 

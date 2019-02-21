@@ -33,24 +33,25 @@ class ImplicitReturn(Error):
 class ReturnVisitor(Visitor):
     def __init__(self) -> None:
         super().__init__()
-        self._func_returns_stack: List[List[ast.Return]] = []
+        self._returns_stack: List[List[ast.Return]] = []
 
     def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
-        self._func_returns_stack.append([])
+        self._returns_stack.append([])
         self.generic_visit(node)
-        returns = self._func_returns_stack.pop()
-        if not returns:
+        return_nodes = self._returns_stack.pop()
+
+        if not return_nodes:
             return
 
-        if self._result_exists(returns):
-            self._check_implicit_return_value(returns)
+        if self._result_exists(return_nodes):
+            self._check_implicit_return_value(return_nodes)
             self._check_implicit_return(node.body[-1])
 
         else:
-            self._check_unnecessary_return_none(returns)
+            self._check_unnecessary_return_none(return_nodes)
 
     def visit_Return(self, node: ast.Return) -> None:
-        self._func_returns_stack[-1].append(node)
+        self._returns_stack[-1].append(node)
 
     def _result_exists(self, nodes: List[ast.Return]) -> bool:
         for node in nodes:
@@ -65,7 +66,7 @@ class ReturnVisitor(Visitor):
                 self.error_from_node(ImplicitReturnValue, node)
 
     def _check_implicit_return(self, last_node: ast.AST) -> None:
-        if not isinstance(last_node, (ast.Return, ast.Raise)):
+        if not isinstance(last_node, (ast.Return, ast.Raise, ast.While)):
             self.error_from_node(ImplicitReturn, last_node)
 
     def _check_unnecessary_return_none(self, nodes: List[ast.Return]) -> None:

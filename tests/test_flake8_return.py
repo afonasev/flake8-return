@@ -68,6 +68,14 @@ def x(y):
         return 1
     raise Exception
     """,
+        # last line in while loop
+        f"""
+def x(y):
+    while True:
+        if y > 0:
+            return 1
+        y += 1
+    """,
     ),
 )
 def test_error_not_exists(tmpdir, src):
