@@ -1,5 +1,5 @@
 import ast
-from typing import List
+from typing import List, Optional
 
 from flake8_plugin_utils import Error, Plugin, Visitor
 
@@ -41,38 +41,41 @@ class ReturnVisitor(Visitor):
         returns = self._func_returns_stack.pop()
         if not returns:
             return
-        self._check_returns(returns, node.body[-1])
+
+        if self._result_exists(returns):
+            self._check_implicit_return_value(returns)
+            self._check_implicit_return(node.body[-1])
+
+        else:
+            self._check_unnecessary_return_none(returns)
 
     def visit_Return(self, node: ast.Return) -> None:
         self._func_returns_stack[-1].append(node)
 
-    def _check_returns(
-        self, returns: List[ast.Return], last_node: ast.AST
-    ) -> None:
-        without_value_returns: List[ast.Return] = []
-        with_none_returns: List[ast.Return] = []
-
-        result_exists = False
-        for node in returns:
+    def _result_exists(self, nodes: List[ast.Return]) -> bool:
+        for node in nodes:
             value = node.value
+            if value and not _is_none(value):
+                return True
+        return False
 
-            if value is None:
-                without_value_returns.append(node)
-            elif isinstance(value, ast.NameConstant) and value.value is None:
-                with_none_returns.append(node)
-            else:
-                result_exists = True
-
-        if result_exists:
-            for node in without_value_returns:
+    def _check_implicit_return_value(self, nodes: List[ast.Return]) -> None:
+        for node in nodes:
+            if not node.value:
                 self.error_from_node(ImplicitReturnValue, node)
 
-            if not isinstance(last_node, (ast.Return, ast.Raise)):
-                self.error_from_node(ImplicitReturn, last_node)
+    def _check_implicit_return(self, last_node: ast.AST) -> None:
+        if not isinstance(last_node, (ast.Return, ast.Raise)):
+            self.error_from_node(ImplicitReturn, last_node)
 
-        else:
-            for node in with_none_returns:
+    def _check_unnecessary_return_none(self, nodes: List[ast.Return]) -> None:
+        for node in nodes:
+            if _is_none(node.value):
                 self.error_from_node(UnnecessaryReturnNone, node)
+
+
+def _is_none(node: Optional[ast.AST]) -> bool:
+    return isinstance(node, ast.NameConstant) and node.value is None
 
 
 class ReturnPlugin(Plugin):
