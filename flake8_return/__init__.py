@@ -65,14 +65,29 @@ class ReturnVisitor(Visitor):
             if not node.value:
                 self.error_from_node(ImplicitReturnValue, node)
 
-    def _check_implicit_return(self, last_node: ast.AST) -> None:
-        if not isinstance(last_node, (ast.Return, ast.Raise, ast.While)):
-            self.error_from_node(ImplicitReturn, last_node)
-
     def _check_unnecessary_return_none(self, nodes: List[ast.Return]) -> None:
         for node in nodes:
             if _is_none(node.value):
                 self.error_from_node(UnnecessaryReturnNone, node)
+
+    def _check_implicit_return(self, last_node: ast.AST) -> None:
+        if isinstance(last_node, ast.If):
+            if not last_node.body or not last_node.orelse:
+                self.error_from_node(ImplicitReturn, last_node)
+                return
+
+            self._check_implicit_return(last_node.body[-1])
+            self._check_implicit_return(last_node.orelse[-1])
+            return
+
+        if isinstance(last_node, ast.For) and last_node.orelse:
+            self._check_implicit_return(last_node.orelse[-1])
+            return
+
+        if not isinstance(
+            last_node, (ast.Return, ast.Raise, ast.While, ast.Try)
+        ):
+            self.error_from_node(ImplicitReturn, last_node)
 
 
 def _is_none(node: Optional[ast.AST]) -> bool:

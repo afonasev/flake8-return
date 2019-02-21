@@ -23,7 +23,7 @@ def x(y):
 def x(y):
     if y:
         return
-    ...
+    print()
     """,
         # with return value
         """
@@ -31,6 +31,44 @@ def x(y):
     if not y:
         return 1
     return 2
+    """,
+        """
+def x(y):
+    if not y:
+        return 1
+    else:
+        return 2
+    """,
+        """
+def x(y):
+    if not y:
+        return 1
+    elif y - 10:
+        return 2
+    else:
+        return 3
+    """,
+        """
+def x(y):
+    for i in range(10):
+        if i > 100:
+            return i
+    else:
+        return 1
+    """,
+        """
+def x(y):
+    try:
+        return 1
+    except:
+        return 2
+    """,
+        """
+def x(y):
+    try:
+        return 1
+    finally:
+        return 2
     """,
         # inner function
         """
@@ -119,6 +157,29 @@ def test_unnecessary_return_none(tmpdir, src):
 def x(y):
     if not y:
         return 1
+    """,
+        """
+def x(y):
+    if not y:
+        print()
+    else:
+        return 2
+    """,
+        """
+def x(y):
+    if not y:
+        return 1
+    elif y - 100:
+        print()
+    else:
+        return 2
+    """,
+        """
+def x(y):
+    if not y:
+        return 1
+    else:
+        print()
     """,
     ),
 )
