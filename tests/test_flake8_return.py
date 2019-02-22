@@ -103,6 +103,17 @@ error_not_exists = (
                 return 1
             y += 1
     """,
+    # exclude empty functions
+    """
+    def x(y):
+        return None
+    """,
+    # return inner with statement
+    """
+    def x(y):
+        with y:
+            return 1
+    """,
 )
 
 
@@ -115,7 +126,7 @@ implicit_return_value = (
     """
     def x(y):
         if not y:
-            return
+            return  # here
         return 1
     """,
 )
@@ -133,7 +144,7 @@ unnecessary_return_none = (
     def x(y):
         if not y:
             return
-        return None
+        return None  # here
     """,
 )
 
@@ -146,15 +157,17 @@ def test_unnecessary_return_none(src):
 
 
 implicit_return = (
+    # if/elif/else
     """
     def x(y):
         if not y:
             return 1
+        # here
     """,
     """
     def x(y):
         if not y:
-            print()
+            print()  # here
         else:
             return 2
     """,
@@ -163,7 +176,7 @@ implicit_return = (
         if not y:
             return 1
         elif y - 100:
-            print()
+            print()  # here
         else:
             return 2
     """,
@@ -172,7 +185,23 @@ implicit_return = (
         if not y:
             return 1
         else:
-            print()
+            print()  # here
+    """,
+    # for
+    """
+    def x(y):
+        for i in range(10):
+            if i > 10:
+                return i
+        # here
+    """,
+    """
+    def x(y):
+        for i in range(10):
+            if i > 10:
+                return i
+        else:
+            print()  # here
     """,
 )
 

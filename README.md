@@ -28,6 +28,11 @@ MIT
 
 ## Change Log
 
+### 0.3.0 - 2019.02.22
+
+* skip functions that consist only `return None`
+* fix false positive when last return inner with statement
+
 ### 0.2.0 - 2019.02.21
 
 * fix explicit/implicit

@@ -30,6 +30,14 @@ class ImplicitReturn(Error):
     )
 
 
+class UnnecessaryAssignValueBeforeReturn(Error):
+    code = 'R504'
+    message = (
+        'you should add explicit return at end of the function '
+        'if function have return value except None'
+    )
+
+
 class ReturnVisitor(Visitor):
     def __init__(self) -> None:
         super().__init__()
@@ -41,6 +49,10 @@ class ReturnVisitor(Visitor):
         return_nodes = self._returns_stack.pop()
 
         if not return_nodes:
+            return
+
+        if len(node.body) == 1 and isinstance(node.body[-1], ast.Return):
+            # skip functions that consist only `return None`
             return
 
         if self._result_exists(return_nodes):
@@ -82,6 +94,10 @@ class ReturnVisitor(Visitor):
 
         if isinstance(last_node, ast.For) and last_node.orelse:
             self._check_implicit_return(last_node.orelse[-1])
+            return
+
+        if isinstance(last_node, ast.With):
+            self._check_implicit_return(last_node.body[-1])
             return
 
         if not isinstance(
