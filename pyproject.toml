@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "flake8-return"
-version = "0.2.0"
+version = "0.3.0"
 description = "Flake8 plugin that checks return values"
 authors = ["Afonasev Evgeniy <ea.afonasev@gmail.com>"]
 license = "MIT"
