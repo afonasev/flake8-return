@@ -10,7 +10,7 @@ homepage = "https://pypi.org/project/flake8-return"
 keywords = ['flake8', 'plugin', 'return']
 
 [tool.poetry.plugins."flake8.extension"]
-R50 = 'flake8_return:ReturnPlugin'
+R50 = 'flake8_return.plugin:ReturnPlugin'
 
 [tool.poetry.dependencies]
 python = "^3.6"

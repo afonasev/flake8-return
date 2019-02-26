@@ -21,6 +21,7 @@ pip install flake8-return
 * R501 you shouldn\`t add None at any return if function havn\`t return value except None
 * R502 you should add explicit value at every return if function have return value except None
 * R503 you should add explicit return at end of the function if function have return value except None
+* R504 you shouldn`t assign value to variable if it will be use only as return value
 
 ## License
 
@@ -28,10 +29,11 @@ MIT
 
 ## Change Log
 
-### 0.3.0 - 2019.02.22
+### 0.3.0 - *
 
 * skip functions that consist only `return None`
 * fix false positive when last return inner with statement
+* add unnecessary assign error
 
 ### 0.2.0 - 2019.02.21
 

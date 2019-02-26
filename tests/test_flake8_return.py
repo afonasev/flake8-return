@@ -1,16 +1,17 @@
 import pytest
 from flake8_plugin_utils import assert_error, assert_not_error
 
-from flake8_return import (
+from flake8_return.errors import (
     ImplicitReturn,
     ImplicitReturnValue,
-    ReturnVisitor,
+    UnnecessaryAssign,
     UnnecessaryReturnNone,
 )
+from flake8_return.visitors import ReturnVisitor
 
 
 def _ids(values):
-    return [str(i) for i, _ in enumerate(values)]
+    return ['' for _ in values]
 
 
 error_not_exists = (
@@ -33,13 +34,6 @@ error_not_exists = (
         if not y:
             return 1
         return 2
-    """,
-    """
-    def x(y):
-        if not y:
-            return 1
-        else:
-            return 2
     """,
     """
     def x(y):
@@ -113,6 +107,40 @@ error_not_exists = (
     def x(y):
         with y:
             return 1
+    """,
+    # assign return value
+    """
+    def x(y):
+        a = 1
+        print(a)
+        return a
+    """,
+    """
+    def x():
+        a = 1
+        if y:
+            return a
+        a = a + 2
+        print(a)
+        return a
+    """,
+    """
+    def x():
+        a = {}
+        a['b'] = 2
+        return a
+    """,
+    """
+    def x():
+        a = []
+        a.append(2)
+        return a
+    """,
+    """
+    def x():
+        a = lambda x: x
+        a()
+        return a
     """,
 )
 
@@ -209,3 +237,41 @@ implicit_return = (
 @pytest.mark.parametrize('src', implicit_return, ids=_ids(implicit_return))
 def test_implicit_return(src):
     assert_error(ReturnVisitor, src, ImplicitReturn)
+
+
+unnecessary_assign = (
+    """
+    def x():
+        a = 1
+        return a  # here
+    """,
+    """
+    def x():
+        a = 1
+        print()
+        return a  # here
+    """,
+    """
+    def x():
+        a = 1
+        print(a)
+        a = 2
+        return a  # here
+    """,
+    """
+    def x():
+        a = 1
+        if True:
+            return a  # here
+        a = 2
+        print(a)
+        return a
+    """,
+)
+
+
+@pytest.mark.parametrize(
+    'src', unnecessary_assign, ids=_ids(unnecessary_assign)
+)
+def test_unnecessary_assign(src):
+    assert_error(ReturnVisitor, src, UnnecessaryAssign)
