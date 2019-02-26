@@ -16,7 +16,7 @@ unnecessary_assign = (
     def x():
         b, a = 1, 2
         print(b)
-        return a, b  # error
+        return a  # error
     """,
     """
     def x():

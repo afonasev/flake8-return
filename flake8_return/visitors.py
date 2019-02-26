@@ -138,11 +138,6 @@ class ReturnVisitor(Visitor):
             self.error_from_node(ImplicitReturn, last_node)
 
     def _check_unnecessary_assign(self, node: ast.AST) -> None:
-        if isinstance(node, ast.Tuple):
-            for n in node.elts:
-                self._check_unnecessary_assign(n)
-            return
-
         if not isinstance(node, ast.Name):
             return
 
