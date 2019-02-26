@@ -1,6 +1,6 @@
 import ast
 from collections import defaultdict
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 
 from flake8_plugin_utils import Visitor
 
@@ -12,6 +12,7 @@ from .errors import (
 )
 
 NameToLines = Dict[str, List[int]]
+Function = Union[ast.AsyncFunctionDef, ast.FunctionDef]
 
 ASSIGNS = 'assigns'
 REFS = 'refs'
@@ -36,6 +37,12 @@ class ReturnVisitor(Visitor):
         return self._stack[-1][RETURNS]
 
     def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
+        self._visit_with_stask(node)
+
+    def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
+        self._visit_with_stask(node)
+
+    def _visit_with_stask(self, node: Function) -> None:
         self._stack.append(
             {ASSIGNS: defaultdict(list), REFS: defaultdict(list), RETURNS: []}
         )
@@ -71,7 +78,7 @@ class ReturnVisitor(Visitor):
         if self._stack:
             self.refs[node.id].append(node.lineno)
 
-    def _check_function(self, node: ast.FunctionDef) -> None:
+    def _check_function(self, node: Function) -> None:
         if not self.returns or not node.body:
             return
 

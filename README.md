@@ -29,12 +29,13 @@ MIT
 
 ## Change Log
 
-### 0.3.0 - *
+### 0.3.0 - 2019.02.26
 
 * skip functions that consist only `return None`
 * fix false positive when last return inner with statement
 * add unnecessary assign error
 * add support tuple in assign or return expressions
+* add suppport asyncio coroutines
 
 ### 0.2.0 - 2019.02.21
 
