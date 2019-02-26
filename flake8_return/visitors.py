@@ -50,15 +50,22 @@ class ReturnVisitor(Visitor):
     def visit_Assign(self, node: ast.Assign) -> None:
         if not self._stack:
             return
-
-        for target in node.targets:
-            if isinstance(target, ast.Name):
-                self.assigns[target.id].append(node.lineno)
-            else:
-                # visit not Name node, e.g. d['key']
-                self.generic_visit(target)
-
+        for t in node.targets:
+            self._visit_assign_target(t)
         self.generic_visit(node.value)
+
+    def _visit_assign_target(self, node: ast.AST) -> None:
+        if isinstance(node, ast.Tuple):
+            for n in node.elts:
+                self._visit_assign_target(n)
+            return
+
+        if isinstance(node, ast.Name):
+            self.assigns[node.id].append(node.lineno)
+            return
+
+        # get item, etc.
+        self.generic_visit(node)
 
     def visit_Name(self, node: ast.Name) -> None:
         if self._stack:
@@ -78,7 +85,10 @@ class ReturnVisitor(Visitor):
 
         self._check_implicit_return_value()
         self._check_implicit_return(node.body[-1])
-        self._check_unnecessary_assign()
+
+        for n in self.returns:
+            if n.value:
+                self._check_unnecessary_assign(n.value)
 
     def _result_exists(self) -> bool:
         for node in self.returns:
@@ -120,25 +130,29 @@ class ReturnVisitor(Visitor):
         ):
             self.error_from_node(ImplicitReturn, last_node)
 
-    def _check_unnecessary_assign(self) -> None:
-        for node in self.returns:
-            if not isinstance(node.value, ast.Name):
-                continue
+    def _check_unnecessary_assign(self, node: ast.AST) -> None:
+        if isinstance(node, ast.Tuple):
+            for n in node.elts:
+                self._check_unnecessary_assign(n)
+            return
 
-            var_name = node.value.id
-            return_lineno = node.lineno
+        if not isinstance(node, ast.Name):
+            return
 
-            if var_name not in self.assigns:
-                continue
+        var_name = node.id
+        return_lineno = node.lineno
 
-            if var_name not in self.refs:
-                self.error_from_node(UnnecessaryAssign, node)
-                continue
+        if var_name not in self.assigns:
+            return
 
-            if self._has_refs_before_next_assign(var_name, return_lineno):
-                continue
-
+        if var_name not in self.refs:
             self.error_from_node(UnnecessaryAssign, node)
+            return
+
+        if self._has_refs_before_next_assign(var_name, return_lineno):
+            return
+
+        self.error_from_node(UnnecessaryAssign, node)
 
     def _has_refs_before_next_assign(
         self, var_name: str, return_lineno: int

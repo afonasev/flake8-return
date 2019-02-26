@@ -34,6 +34,7 @@ MIT
 * skip functions that consist only `return None`
 * fix false positive when last return inner with statement
 * add unnecessary assign error
+* add support tuple in assign or return expressions
 
 ### 0.2.0 - 2019.02.21
 

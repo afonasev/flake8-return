@@ -14,6 +14,12 @@ unnecessary_assign = (
     """,
     """
     def x():
+        b, a = 1, 2
+        print(b)
+        return a, b  # error
+    """,
+    """
+    def x():
         a = 1
         print()
         return a  # error
