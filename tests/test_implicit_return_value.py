@@ -10,7 +10,7 @@ implicit_return_value = (
     """
     def x(y):
         if not y:
-            return  # here
+            return  # error
         return 1
     """,
 )

@@ -19,9 +19,43 @@ pip install flake8-return
 ## Errors
 
 * R501 you shouldn\`t add None at any return if function havn\`t return value except None
+
+```python
+def x(y):
+    if not y:
+        return
+    return None  # error!
+```
+
 * R502 you should add explicit value at every return if function have return value except None
+
+```python
+def x(y):
+    if not y:
+        return  # error!
+    return 1
+```
+
 * R503 you should add explicit return at end of the function if function have return value except None
+
+```python
+def x(y):
+    if not y:
+        return  # error!
+    return 1
+```
+
 * R504 you shouldn`t assign value to variable if it will be use only as return value
+
+```python
+def x():
+    a = 1
+    # some code that not using `a`
+    print('test')
+    return a  # error!
+```
+
+Returns in asyncio coroutines also supported.
 
 ## License
 

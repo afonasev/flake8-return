@@ -11,7 +11,7 @@ unnecessary_return_none = (
     def x(y):
         if not y:
             return
-        return None  # here
+        return None  # error
     """,
 )
 

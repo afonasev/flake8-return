@@ -12,8 +12,7 @@ coro_errors = (
     async def x(y):
         if not y:
             return 1
-        await y
-        # here
+        await y # error
     """,
 )
 

@@ -12,12 +12,12 @@ implicit_return = (
     def x(y):
         if not y:
             return 1
-        # here
+        # error
     """,
     """
     def x(y):
         if not y:
-            print()  # here
+            print()  # error
         else:
             return 2
     """,
@@ -26,7 +26,7 @@ implicit_return = (
         if not y:
             return 1
         elif y - 100:
-            print()  # here
+            print()  # error
         else:
             return 2
     """,
@@ -35,7 +35,7 @@ implicit_return = (
         if not y:
             return 1
         else:
-            print()  # here
+            print()  # error
     """,
     # for
     """
@@ -43,7 +43,7 @@ implicit_return = (
         for i in range(10):
             if i > 10:
                 return i
-        # here
+        # error
     """,
     """
     def x(y):
@@ -51,7 +51,7 @@ implicit_return = (
             if i > 10:
                 return i
         else:
-            print()  # here
+            print()  # error
     """,
 )
 
