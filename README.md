@@ -63,7 +63,12 @@ MIT
 
 ## Change Log
 
-### 0.3.0 - 2019.02.26
+### Unreleased
+
+* auto wheel build and release on tag
+* add make bump_version command
+
+### 0.3.0 - 2019-02-26
 
 * skip functions that consist only `return None`
 * fix false positive when last return inner with statement
@@ -71,7 +76,7 @@ MIT
 * add support tuple in assign or return expressions
 * add suppport asyncio coroutines
 
-### 0.2.0 - 2019.02.21
+### 0.2.0 - 2019-02-21
 
 * fix explicit/implicit
 * add flake8-plugin-utils as dependency
@@ -79,10 +84,10 @@ MIT
 * allow no return as last line in while block
 * fix if/elif/else cases
 
-### 0.1.1 - 2019.02.10
+### 0.1.1 - 2019-02-10
 
 * fix error messages
 
-### 0.1.0 - 2019.02.10
+### 0.1.0 - 2019-02-10
 
 * initial
