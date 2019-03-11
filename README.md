@@ -63,7 +63,7 @@ MIT
 
 ## Change Log
 
-### Unreleased
+### 0.3.1 - 2019-03-11
 
 * add pypi deploy into travis config
 * add make bump_version command
