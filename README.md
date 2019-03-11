@@ -65,7 +65,7 @@ MIT
 
 ### Unreleased
 
-* auto wheel build and release on tag
+* add pypi deploy into travis config
 * add make bump_version command
 
 ### 0.3.0 - 2019-02-26

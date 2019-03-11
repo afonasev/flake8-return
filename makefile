@@ -24,8 +24,3 @@ precommit_install:
 	git init
 	echo '#!/bin/sh\nmake lint test\n' > .git/hooks/pre-commit
 	chmod +x .git/hooks/pre-commit
-
-bump_version:
-	poetry update
-	make lint test
-	bumpversion --allow-dirty $(part)

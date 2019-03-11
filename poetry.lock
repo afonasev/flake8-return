@@ -387,6 +387,17 @@ pytest = ">=3.6"
 
 [[package]]
 category = "dev"
+description = "A simple plugin to list unused fixtures in pytest"
+name = "pytest-deadfixtures"
+optional = false
+python-versions = "*"
+version = "2.1.0"
+
+[package.dependencies]
+pytest = ">=3.0.0"
+
+[[package]]
+category = "dev"
 description = "Thin-wrapper around the mock package for easier use with py.test"
 name = "pytest-mock"
 optional = false
@@ -456,7 +467,7 @@ python-versions = "*"
 version = "1.11.1"
 
 [metadata]
-content-hash = "6e19d2a09a51598f61219ba39bb5dc5ef6a7468149aa105814df13db19190274"
+content-hash = "a0c36845a6edcd27b2df76d5f23b3dc89f055769a943ba8b3cd88ee77691b6f6"
 python-versions = "^3.6"
 
 [metadata.hashes]
@@ -496,6 +507,7 @@ pyflakes = ["17dbeb2e3f4d772725c777fabc446d5634d1038f234e77343108ce445ea69ce0", 
 pylint = ["5d77031694a5fb97ea95e828c8d10fc770a1df6eb3906067aaed42201a8a6a09", "723e3db49555abaf9bf79dc474c6b9e2935ad82230b10c1138a71ea41ac0fff1"]
 pytest = ["3f193df1cfe1d1609d4c583838bea3d532b18d6160fd3f55c9447fdca30848ec", "e246cf173c01169b9617fc07264b7b1316e78d7a650055235d6d897bc80d9660"]
 pytest-cov = ["0ab664b25c6aa9716cbf203b17ddb301932383046082c081b9848a0edf5add33", "230ef817450ab0699c6cc3c9c8f7a829c34674456f2ed8df1fe1d39780f7c87f"]
+pytest-deadfixtures = ["458b2314862696af11223d869c97814e63db8a7b9f61dcf42fe07a72a7ff9bd8", "61e34fb0f777bc0f321c7d45f39447e965fb1a6d2de243e47aa034387229d9d3"]
 pytest-mock = ["4d0d06d173eecf172703219a71dbd4ade0e13904e6bbce1ce660e2e0dc78b5c4", "bfdf02789e3d197bd682a758cae0a4a18706566395fbe2803badcd1335e0173e"]
 six = ["3350809f0555b11f552448330d0b52d5f24c91a322ea4a15ef22629740f3761c", "d16a0141ec1a18405cd4ce8b4613101da75da0e9a7aec5bdd4fa804d0e0eba73"]
 testfixtures = ["361e0a557f95e351ee4487a14eb26ccb1337038a33f16f588bcb0be90977d80b", "c20bd8f26be2afda72a11f98669da6fefab5f99ce5274021d36a59ea4f35f950"]
