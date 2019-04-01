@@ -63,7 +63,7 @@ MIT
 
 ## Change Log
 
-### Unreleased
+### 0.3.2 - 2019-04-01
 
 * allow "assert False" as last function return
 
