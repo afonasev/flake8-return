@@ -88,6 +88,13 @@ error_not_exists = (
         with y:
             return 1
     """,
+    # assert as last return
+    """
+    def x(y):
+        if not y:
+            return 1
+        assert False, 'Sanity check'
+    """,
 )
 
 

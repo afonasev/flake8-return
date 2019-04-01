@@ -63,6 +63,10 @@ MIT
 
 ## Change Log
 
+### Unreleased
+
+* allow "assert False" as last function return
+
 ### 0.3.1 - 2019-03-11
 
 * add pypi deploy into travis config

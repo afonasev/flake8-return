@@ -132,6 +132,9 @@ class ReturnVisitor(Visitor):
             self._check_implicit_return(last_node.body[-1])
             return
 
+        if isinstance(last_node, ast.Assert) and _is_false(last_node.test):
+            return
+
         if not isinstance(
             last_node, (ast.Return, ast.Raise, ast.While, ast.Try)
         ):
@@ -186,3 +189,7 @@ class ReturnVisitor(Visitor):
 
 def _is_none(node: Optional[ast.AST]) -> bool:
     return isinstance(node, ast.NameConstant) and node.value is None
+
+
+def _is_false(node: Optional[ast.AST]) -> bool:
+    return isinstance(node, ast.NameConstant) and node.value is False
