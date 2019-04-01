@@ -16,7 +16,6 @@ lint:
 	$(BIN)mypy $(CODE) tests
 	$(BIN)black --py36 --skip-string-normalization --line-length=79 --check $(CODE) tests
 	$(BIN)pytest --dead-fixtures --dup-fixtures
-	$(BIN)safety check --bare --full-report
 
 pretty:
 	$(BIN)isort --apply --recursive $(CODE) tests
