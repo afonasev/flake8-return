@@ -84,6 +84,12 @@ error_not_exists = (
         a()
         return a
     """,
+    # ignore unpacking
+    """
+    def x():
+        b, a = [1, 2]
+        return a
+    """,
 )
 
 

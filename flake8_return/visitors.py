@@ -10,6 +10,7 @@ from .errors import (
     UnnecessaryAssign,
     UnnecessaryReturnNone,
 )
+from .utils import is_false, is_none
 
 NameToLines = Dict[str, List[int]]
 Function = Union[ast.AsyncFunctionDef, ast.FunctionDef]
@@ -57,9 +58,17 @@ class ReturnVisitor(Visitor):
     def visit_Assign(self, node: ast.Assign) -> None:
         if not self._stack:
             return
-        for t in node.targets:
-            self._visit_assign_target(t)
+
         self.generic_visit(node.value)
+
+        target = node.targets[0]
+        if isinstance(target, ast.Tuple) and not isinstance(
+            node.value, ast.Tuple
+        ):
+            # skip unpacking assign e.g: x, y = my_object
+            return
+
+        self._visit_assign_target(target)
 
     def _visit_assign_target(self, node: ast.AST) -> None:
         if isinstance(node, ast.Tuple):
@@ -100,7 +109,7 @@ class ReturnVisitor(Visitor):
     def _result_exists(self) -> bool:
         for node in self.returns:
             value = node.value
-            if value and not _is_none(value):
+            if value and not is_none(value):
                 return True
         return False
 
@@ -111,7 +120,7 @@ class ReturnVisitor(Visitor):
 
     def _check_unnecessary_return_none(self) -> None:
         for node in self.returns:
-            if _is_none(node.value):
+            if is_none(node.value):
                 self.error_from_node(UnnecessaryReturnNone, node)
 
     def _check_implicit_return(self, last_node: ast.AST) -> None:
@@ -132,7 +141,7 @@ class ReturnVisitor(Visitor):
             self._check_implicit_return(last_node.body[-1])
             return
 
-        if isinstance(last_node, ast.Assert) and _is_false(last_node.test):
+        if isinstance(last_node, ast.Assert) and is_false(last_node.test):
             return
 
         if not isinstance(
@@ -185,11 +194,3 @@ class ReturnVisitor(Visitor):
                 return True
 
         return False
-
-
-def _is_none(node: Optional[ast.AST]) -> bool:
-    return isinstance(node, ast.NameConstant) and node.value is None
-
-
-def _is_false(node: Optional[ast.AST]) -> bool:
-    return isinstance(node, ast.NameConstant) and node.value is False

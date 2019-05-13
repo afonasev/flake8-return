@@ -25,3 +25,12 @@ pretty:
 precommit_install:
 	echo '#!/bin/sh\nmake lint test\n' > .git/hooks/pre-commit
 	chmod +x .git/hooks/pre-commit
+
+bump_major:
+	$(BIN)bumpversion major
+
+bump_minor:
+	$(BIN)bumpversion minor
+
+bump_patch:
+	$(BIN)bumpversion patch
