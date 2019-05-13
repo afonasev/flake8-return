@@ -63,7 +63,7 @@ MIT
 
 ## Change Log
 
-### Unreleased
+### 1.0.0 - 2019-05-13
 
 * skip assign after unpacking while unnecessary assign checking "(x, y = my_obj)"
 
