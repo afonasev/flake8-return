@@ -63,20 +63,29 @@ MIT
 
 ## Change Log
 
-### 1.0.0 - 2019-05-13
+Unreleased
+-----
+
+* update flask_plugin_utils version to 1.0
+
+1.0.0 - 2019-05-13
+-----
 
 * skip assign after unpacking while unnecessary assign checking "(x, y = my_obj)"
 
-### 0.3.2 - 2019-04-01
+0.3.2 - 2019-04-01
+-----
 
 * allow "assert False" as last function return
 
-### 0.3.1 - 2019-03-11
+0.3.1 - 2019-03-11
+-----
 
 * add pypi deploy into travis config
 * add make bump_version command
 
-### 0.3.0 - 2019-02-26
+0.3.0 - 2019-02-26
+-----
 
 * skip functions that consist only `return None`
 * fix false positive when last return inner with statement
@@ -84,7 +93,8 @@ MIT
 * add support tuple in assign or return expressions
 * add suppport asyncio coroutines
 
-### 0.2.0 - 2019-02-21
+0.2.0 - 2019-02-21
+-----
 
 * fix explicit/implicit
 * add flake8-plugin-utils as dependency
@@ -92,10 +102,12 @@ MIT
 * allow no return as last line in while block
 * fix if/elif/else cases
 
-### 0.1.1 - 2019-02-10
+0.1.1 - 2019-02-10
+-----
 
 * fix error messages
 
-### 0.1.0 - 2019-02-10
+0.1.0 - 2019-02-10
+-----
 
 * initial
