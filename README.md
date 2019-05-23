@@ -66,6 +66,11 @@ MIT
 Unreleased
 -----
 
+* ...
+
+1.1.0 - 2019-05-23
+-----
+
 * update flask_plugin_utils version to 1.0
 
 1.0.0 - 2019-05-13
