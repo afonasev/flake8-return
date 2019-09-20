@@ -21,6 +21,10 @@ RETURNS = 'returns'
 
 
 class UnnecessaryAssignMixin(Visitor):
+    def __init__(self) -> None:
+        super().__init__()
+        self._loop_count: int = 0
+
     @property
     def assigns(self) -> NameToLines:
         return self._stack[-1][ASSIGNS]
@@ -28,6 +32,17 @@ class UnnecessaryAssignMixin(Visitor):
     @property
     def refs(self) -> NameToLines:
         return self._stack[-1][REFS]
+
+    def visit_For(self, node: ast.For) -> None:
+        self._visit_for(node)
+
+    def visit_AsyncFor(self, node: ast.AsyncFor) -> None:
+        self._visit_for(node)
+
+    def _visit_for(self, node: ast.AST) -> None:
+        self._loop_count += 1
+        self.generic_visit(node)
+        self._loop_count -= 1
 
     def visit_Assign(self, node: ast.Assign) -> None:
         if not self._stack:
@@ -54,7 +69,7 @@ class UnnecessaryAssignMixin(Visitor):
                 self._visit_assign_target(n)
             return
 
-        if isinstance(node, ast.Name):
+        if not self._loop_count and isinstance(node, ast.Name):
             self.assigns[node.id].append(node.lineno)
             return
 

@@ -90,6 +90,13 @@ error_not_exists = (
         b, a = [1, 2]
         return a
     """,
+    """
+    def x():
+        val = ''
+        for i in range(5):
+            val = val + str(i)
+        return val
+    """,
 )
 
 
