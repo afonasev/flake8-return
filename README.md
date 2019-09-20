@@ -66,6 +66,11 @@ MIT
 Unreleased
 -----
 
+* ...
+
+1.1.1 - 2019-09-21
+-----
+
 * fixed [#3](https://github.com/afonasev/flake8-return/issues/3) The R504 doesn't detect that the variable is modified in loop
 * fixed [#4](https://github.com/afonasev/flake8-return/issues/4) False positive with R503 inside async with clause
 
