@@ -66,7 +66,7 @@ MIT
 Unreleased
 -----
 
-* ...
+* fixed [#4](https://github.com/afonasev/flake8-return/issues/4) False positive with R503 inside async with clause
 
 1.1.0 - 2019-05-23
 -----

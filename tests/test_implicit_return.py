@@ -88,6 +88,11 @@ error_not_exists = (
         with y:
             return 1
     """,
+    """
+    async def function():
+        async with thing as foo:
+            return foo.bar
+    """,
     # assert as last return
     """
     def x(y):
