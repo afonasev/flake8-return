@@ -21,7 +21,7 @@ black = {version = "^19.10b0",allows-prereleases = true}
 bumpversion = "^0.5.3"
 flake8-awesome = "^1.2"
 mypy = "^0.740"
-pylint = "^2.2"
+pylint = "^2.4"
 pytest = "^3.0"
 pytest-cov = "^2.8"
 pytest-deadfixtures = "^2.1"
