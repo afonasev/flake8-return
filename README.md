@@ -18,7 +18,7 @@ pip install flake8-return
 
 ## Errors
 
-* R501 you shouldn\`t add None at any return if function havn\`t return value except None
+* R501 you shouldn\`t add None at any return if function haven\`t return value except None
 
 ```python
 def x(y):
