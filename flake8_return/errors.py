@@ -5,7 +5,7 @@ class UnnecessaryReturnNone(Error):
     code = 'R501'
     message = (
         'you shouldn`t add None at any return '
-        'if function havn`t return value except None'
+        'if function haven`t return value except None'
     )
 
 
