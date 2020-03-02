@@ -126,7 +126,7 @@ description = "Flake8 awesome plugins pack"
 name = "flake8-awesome"
 optional = false
 python-versions = ">=3.6,<4.0"
-version = "1.2.0"
+version = "1.2.1"
 
 [package.dependencies]
 flake8 = "*"
@@ -139,7 +139,7 @@ flake8-isort = "*"
 flake8-logging-format = "*"
 flake8-print = "*"
 flake8-pytest = "*"
-flake8-pytest-style = ">=0.1.3,<0.2.0"
+flake8-pytest-style = ">=0.1.3"
 flake8-return = "*"
 pep8-naming = "*"
 
@@ -598,7 +598,7 @@ coverage = ["0c5fe441b9cfdab64719f24e9684502a59432df7570521563d7b1aff27ac755f", 
 entrypoints = ["589f874b313739ad35be6e0cd7efde2a4e9b6fea91edcc34e58ecbb8dbe56d19", "c70dd71abe5a8c85e55e12c19bd91ccfeec11a6e99044204511f9ed547d48451"]
 eradicate = ["4ffda82aae6fd49dfffa777a857cb758d77502a1f2e0f54c9ac5155a39d2d01a"]
 flake8 = ["859996073f341f2670741b51ec1e67a01da142831aa1fdc6242dbf88dffbe661", "a796a115208f5c03b18f332f7c11729812c8c3ded6c46319c59b53efd3819da8"]
-flake8-awesome = ["17a3a5a7d55b8690c57b1afa0d9a64d030e6aed17edc04bbb7c134aac88c8629", "988f693c1c6246ad227a7f56b1748fb7eccb87259c4556694c36a3f776cfd1cc"]
+flake8-awesome = ["b6eb6e95249f00477c98f7df7007d7396965e5aa069ed6202fea7c6aaca58e86", "bada1eef925b93234ebc0293179f0e85d79f5406212f93eb81793daa72f11c13"]
 flake8-breakpoint = ["27e0cb132647f9ef348b4a3c3126e7350bedbb22e8e221cd11712a223855ea0b", "5bc70d478f0437a3655d094e1d2fca81ddacabaa84d99db45ad3630bf2004064"]
 flake8-builtins = ["8d806360767947c0035feada4ddef3ede32f0a586ef457e62d811b8456ad9a51", "cd7b1b7fec4905386a3643b59f9ca8e305768da14a49a7efb31fe9364f33cd04"]
 flake8-comprehensions = ["35f826956e87f230415cde9c3b8b454e785736cf5ff0be551c441b41b937f699", "f0b61d983d608790abf3664830d68efd3412265c2d10f6a4ba1a353274dbeb64"]
