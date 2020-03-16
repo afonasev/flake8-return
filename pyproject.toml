@@ -24,7 +24,7 @@ mypy = "^0.770"
 pylint = "^2.4"
 pytest = "^5.4"
 pytest-cov = "^2.8"
-pytest-deadfixtures = "^2.1"
+pytest-deadfixtures = "^2.2"
 pytest-mock = "^2.0"
 unify = "^0.5"
 
