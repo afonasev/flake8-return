@@ -18,7 +18,7 @@ flake8-plugin-utils = "^1.0"
 
 [tool.poetry.dev-dependencies]
 black = {version = "^19.10b0",allows-prereleases = true}
-bumpversion = "^0.5.3"
+bumpversion = "^0.6.0"
 flake8-awesome = "^1.2"
 mypy = "^0.770"
 pylint = "^2.5"
