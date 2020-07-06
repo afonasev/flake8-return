@@ -97,6 +97,15 @@ error_not_exists = (
             val = val + str(i)
         return val
     """,
+    """
+    def x():
+        val = ''
+        i = 5
+        while i:
+            val = val + str(i)
+            i = i - x
+        return val
+    """,
 )
 
 
