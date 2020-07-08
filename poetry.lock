@@ -333,7 +333,7 @@ description = "The package provides base classes and utils for flake8 plugin wri
 name = "flake8-plugin-utils"
 optional = false
 python-versions = ">=3.6,<4.0"
-version = "1.1.1"
+version = "1.3.0"
 
 [[package]]
 category = "dev"
@@ -794,7 +794,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pathlib2", "contextlib2", "unittest2"]
 
 [metadata]
-content-hash = "fa21d1b350f0c7a714ca2d66ab14b6dd14142fa07a57394657065c994f89b19b"
+content-hash = "52b9db862cc7209433c4f888b6e403ff8ce44a05f4757dc90fc08f8ac3672e10"
 python-versions = "^3.6"
 
 [metadata.files]
@@ -941,8 +941,8 @@ flake8-logging-format = [
     {file = "flake8-logging-format-0.6.0.tar.gz", hash = "sha256:ca5f2b7fc31c3474a0aa77d227e022890f641a025f0ba664418797d979a779f8"},
 ]
 flake8-plugin-utils = [
-    {file = "flake8-plugin-utils-1.1.1.tar.gz", hash = "sha256:15664d4c4a6c1d02279f6ffcac8999d76f5538d14c7f0d487fab3f681c56cd69"},
-    {file = "flake8_plugin_utils-1.1.1-py3-none-any.whl", hash = "sha256:563caf4b8c505af8f930c25f3c7028b5ec458daa8c239bb3a27aaa636d050df6"},
+    {file = "flake8-plugin-utils-1.3.0.tar.gz", hash = "sha256:965931e7c17a760915e38bb10dc60516b414ef8210e987252a8d73dcb196a5f5"},
+    {file = "flake8_plugin_utils-1.3.0-py3-none-any.whl", hash = "sha256:305461c4fbf94877bcc9ccf435771b135d72a40eefd92e70a4b5f761ca43b1c8"},
 ]
 flake8-polyfill = [
     {file = "flake8-polyfill-1.0.2.tar.gz", hash = "sha256:e44b087597f6da52ec6393a709e7108b2905317d0c0b744cdca6208e670d8eda"},
