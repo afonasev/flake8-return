@@ -34,12 +34,15 @@ class UnnecessaryAssignMixin(Visitor):
         return self._stack[-1][REFS]
 
     def visit_For(self, node: ast.For) -> None:
-        self._visit_for(node)
+        self._visit_loop(node)
 
     def visit_AsyncFor(self, node: ast.AsyncFor) -> None:
-        self._visit_for(node)
+        self._visit_loop(node)
 
-    def _visit_for(self, node: ast.AST) -> None:
+    def visit_While(self, node: ast.While) -> None:
+        self._visit_loop(node)
+
+    def _visit_loop(self, node: ast.AST) -> None:
         self._loop_count += 1
         self.generic_visit(node)
         self._loop_count -= 1
