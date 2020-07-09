@@ -2,7 +2,7 @@ from flake8_plugin_utils import Plugin
 
 from .visitors import ReturnVisitor
 
-__version__ = '1.1.1'
+__version__ = '1.1.2'
 
 
 class ReturnPlugin(Plugin):
