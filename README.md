@@ -18,7 +18,7 @@ pip install flake8-return
 
 ## Errors
 
-* R501 you shouldn\`t add None at any return if function haven\`t return value except None
+* R501 do not explicitly return None in function if it is the only possible return value.
 
 ```python
 def x(y):
@@ -27,7 +27,7 @@ def x(y):
     return None  # error!
 ```
 
-* R502 you should add explicit value at every return if function have return value except None
+* R502 do not implicitly return None in function able to return non-None value.
 
 ```python
 def x(y):
@@ -36,7 +36,7 @@ def x(y):
     return 1
 ```
 
-* R503 you should add explicit return at end of the function if function have return value except None
+* R503 missing explicit return at the end of function able to return non-None value.
 
 ```python
 def x(y):
@@ -45,7 +45,7 @@ def x(y):
     return 1
 ```
 
-* R504 you shouldn`t assign value to variable if it will be use only as return value
+* R504 unecessary variable assignement before return statement.
 
 ```python
 def x():
