@@ -41,8 +41,8 @@ def x(y):
 ```python
 def x(y):
     if not y:
-        return  # error!
-    return 1
+        return 1
+    # error!
 ```
 
 * R504 unecessary variable assignement before return statement.
