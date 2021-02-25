@@ -4,30 +4,27 @@ from flake8_plugin_utils import Error
 class UnnecessaryReturnNone(Error):
     code = 'R501'
     message = (
-        'you shouldn`t add None at any return '
-        'if function haven`t return value except None'
+        'do not explicitly return None in function if '
+        'it is the only possible return value.'
     )
 
 
 class ImplicitReturnValue(Error):
     code = 'R502'
     message = (
-        'you should add explicit value at every return '
-        'if function have return value except None'
+        'do not implicitly return None in function able '
+        'to return non-None value.'
     )
 
 
 class ImplicitReturn(Error):
     code = 'R503'
     message = (
-        'you should add explicit return at end of the function '
-        'if function have return value except None'
+        'missing explicit return at the  end of function able'
+        'to return non-None value.'
     )
 
 
 class UnnecessaryAssign(Error):
     code = 'R504'
-    message = (
-        'you shouldn`t assign value to variable '
-        'if it will be use only as return value'
-    )
+    message = 'unecessary variable assignement before return statement.'
