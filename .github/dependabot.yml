@@ -1,0 +1,20 @@
+version: 2
+updates:
+- package-ecosystem: pip
+  directory: "/"
+  schedule:
+    interval: monthly
+    time: "00:00"
+  open-pull-requests-limit: 10
+  assignees:
+  - afonasev
+  ignore:
+  - dependency-name: mypy
+    versions:
+    - "0.800"
+  - dependency-name: pytest
+    versions:
+    - 6.2.1
+  - dependency-name: pytest-mock
+    versions:
+    - 3.4.0
