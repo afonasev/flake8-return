@@ -57,9 +57,29 @@ def x():
 
 Returns in asyncio coroutines also supported.
 
-## License
+## For developers
 
-MIT
+### Show help
+
+    make help
+
+### Create venv and install deps
+
+    make init
+
+### Install git precommit hook
+
+    make precommit
+
+### Run linters, autoformat, tests etc.
+
+    make pretty lint test
+
+### Bump new version
+
+    make bump_major
+    make bump_minor
+    make bump_patch
 
 ## Change Log
 
