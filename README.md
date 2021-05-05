@@ -86,6 +86,11 @@ Returns in asyncio coroutines also supported.
 Unreleased
 -----
 
+* ...
+
+1.1.3 - 2021-05-05
+-----
+
 * Error clarifications (#77) Clément Robert
 * fix linting (migrate to black 20.0b1) (#78) Clément Robert
 
