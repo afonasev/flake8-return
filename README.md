@@ -86,12 +86,15 @@ Returns in asyncio coroutines also supported.
 Unreleased
 -----
 
-* ...
+* Error clarifications (#77) Clément Robert
+* fix linting (migrate to black 20.0b1) (#78) Clément Robert
 
 1.1.2 - 2020-07-09
 -----
 
-* ...
+* Make R504 visitors handle while loops (#56) Frank Tackitt
+* Rename allows-prereleases to allow-prereleases (#55) Frank Tackitt
+* Fix typo: havn't → haven't (#24) Jon Dufresne
 
 1.1.1 - 2019-09-21
 -----
