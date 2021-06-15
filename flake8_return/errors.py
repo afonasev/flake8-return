@@ -20,11 +20,11 @@ class ImplicitReturnValue(Error):
 class ImplicitReturn(Error):
     code = 'R503'
     message = (
-        'missing explicit return at the  end of function able'
+        'missing explicit return at the end of function able'
         'to return non-None value.'
     )
 
 
 class UnnecessaryAssign(Error):
     code = 'R504'
-    message = 'unecessary variable assignement before return statement.'
+    message = 'unnecessary variable assignment before return statement.'
