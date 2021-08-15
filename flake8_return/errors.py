@@ -27,4 +27,4 @@ class ImplicitReturn(Error):
 
 class UnnecessaryAssign(Error):
     code = 'R504'
-    message = 'unecessary variable assignement before return statement.'
+    message = 'unnecessary variable assignment before return statement.'

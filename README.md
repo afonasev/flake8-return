@@ -45,7 +45,7 @@ def x(y):
     # error!
 ```
 
-* R504 unecessary variable assignement before return statement.
+* R504 unnecessary variable assignment before return statement.
 
 ```python
 def x():
@@ -99,7 +99,7 @@ Unreleased
 
 * Make R504 visitors handle while loops (#56) Frank Tackitt
 * Rename allows-prereleases to allow-prereleases (#55) Frank Tackitt
-* Fix typo: havn't → haven't (#24) Jon Dufresne
+* Fix typo: → haven't (#24) Jon Dufresne
 
 1.1.1 - 2019-09-21
 -----
@@ -135,7 +135,7 @@ Unreleased
 * fix false positive when last return inner with statement
 * add unnecessary assign error
 * add support tuple in assign or return expressions
-* add suppport asyncio coroutines
+* add support asyncio coroutines
 
 0.2.0 - 2019-02-21
 -----
