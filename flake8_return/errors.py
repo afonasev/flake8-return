@@ -20,7 +20,7 @@ class ImplicitReturnValue(Error):
 class ImplicitReturn(Error):
     code = 'R503'
     message = (
-        'missing explicit return at the end of function able'
+        'missing explicit return at the end of function able '
         'to return non-None value.'
     )
 
