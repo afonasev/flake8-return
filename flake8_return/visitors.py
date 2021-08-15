@@ -183,12 +183,12 @@ class ReturnVisitor(
         return self._stack[-1][RETURNS]
 
     def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
-        self._visit_with_stask(node)
+        self._visit_with_stack(node)
 
     def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
-        self._visit_with_stask(node)
+        self._visit_with_stack(node)
 
-    def _visit_with_stask(self, node: Function) -> None:
+    def _visit_with_stack(self, node: Function) -> None:
         self._stack.append(
             {ASSIGNS: defaultdict(list), REFS: defaultdict(list), RETURNS: []}
         )

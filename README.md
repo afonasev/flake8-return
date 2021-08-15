@@ -45,7 +45,7 @@ def x(y):
     # error!
 ```
 
-* R504 unecessary variable assignement before return statement.
+* R504 unnecessary variable assignment before return statement.
 
 ```python
 def x():
