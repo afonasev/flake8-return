@@ -51,6 +51,9 @@ class UnnecessaryAssignMixin(Visitor):
         if not self._stack:
             return
 
+        if isinstance(node.value, ast.Name):
+            self.refs[node.value.id].append(node.value.lineno)
+
         self.generic_visit(node.value)
 
         target = node.targets[0]
