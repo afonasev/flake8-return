@@ -106,6 +106,26 @@ error_not_exists = (
             i = i - x
         return val
     """,
+
+    # Test cases for using value for assignment then returning it
+    # See:https://github.com/afonasev/flake8-return/issues/47
+    """
+    def resolve_from_url(self, url: str) -> dict:
+        local_match = self.local_scope_re.match(url)
+        if local_match:
+            schema = get_schema(name=local_match.group(1))
+            self.store[url] = schema
+            return schema
+        raise NotImplementedError(...)
+    """,
+    """
+    my_dict = {}
+
+    def my_func():
+        foo = calculate_foo()
+        my_dict["foo_result"] = foo
+        return foo
+    """,
 )
 
 
