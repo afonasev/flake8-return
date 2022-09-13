@@ -44,7 +44,7 @@ unnecessary_assign = (
     # Incorrect false positives - can be refactored
 
     # https://github.com/afonasev/flake8-return/issues/47#issuecomment-1122571066
-    """ 
+    """
     def get_bar_if_exists(obj):
         result = ""
         if hasattr(obj, "bar"):
@@ -80,7 +80,7 @@ unnecessary_assign = (
             # percent-encoded value.
             if '%' in username:
                 username = quote(username)
-        return username 
+        return username
     """,
 )
 
@@ -173,7 +173,7 @@ error_not_exists = (
     # See test cases above marked: "Incorrect false positives - can be refactored"
 
     # https://github.com/afonasev/flake8-return/issues/47#issuecomment-1122571066
-    """ 
+    """
     def get_bar_if_exists(obj):
         if hasattr(obj, "bar"):
             return str(obj.bar)
@@ -208,7 +208,7 @@ error_not_exists = (
             if '%' in username:
                 return quote(username)
         finally:
-            return username 
+            return username
     """,
 )
 
