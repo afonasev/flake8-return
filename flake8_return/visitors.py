@@ -21,7 +21,7 @@ RETURNS = 'returns'
 
 
 class UnnecessaryAssignMixin(Visitor):
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
         self._loop_count: int = 0
 
