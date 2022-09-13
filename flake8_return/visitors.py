@@ -21,8 +21,8 @@ RETURNS = 'returns'
 
 
 class UnnecessaryAssignMixin(Visitor):
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
         self._loop_count: int = 0
 
     @property
@@ -50,6 +50,9 @@ class UnnecessaryAssignMixin(Visitor):
     def visit_Assign(self, node: ast.Assign) -> None:
         if not self._stack:
             return
+
+        if isinstance(node.value, ast.Name):
+            self.refs[node.value.id].append(node.value.lineno)
 
         self.generic_visit(node.value)
 
@@ -174,8 +177,8 @@ class ReturnVisitor(
     ImplicitReturnMixin,
     ImplicitReturnValueMixin,
 ):
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
         self._stack: List[Any] = []
 
     @property
