@@ -21,8 +21,8 @@ RETURNS = 'returns'
 
 
 class UnnecessaryAssignMixin(Visitor):
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
         self._loop_count: int = 0
 
     @property
@@ -177,8 +177,8 @@ class ReturnVisitor(
     ImplicitReturnMixin,
     ImplicitReturnValueMixin,
 ):
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
         self._stack: List[Any] = []
 
     @property
