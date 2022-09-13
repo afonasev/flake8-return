@@ -4,22 +4,46 @@ jobs:
   lint_python:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup python
+        uses: actions/setup-python@v4
         with:
           python-version: 3.x
-      - run: pip install --upgrade pip wheel
-      - run: pip install bandit black codespell flake8 flake8-bugbear
+
+      - name: Install/upgrade pip and wheel
+        run: pip install --upgrade pip wheel
+
+      - name: Install requirements
+        run: pip install bandit black codespell flake8 flake8-bugbear
                          flake8-comprehensions isort mypy pytest pyupgrade safety
-      - run: bandit --recursive .
-      - run: black --check . || true
-      - run: codespell
-      - run: flake8 . --count --max-complexity=10 --max-line-length=88 --show-source --statistics
-      - run: isort --check-only .
-      - run: |
-          pip install setuptools --editable . || true
+
+      - name: Run bandit
+        run: bandit --recursive .
+
+      - name: Run black
+        run: black --check . || true
+
+      - name: Run codespell
+        run: codespell
+
+      - name: Run flake8
+        run: flake8 . --count --max-complexity=10 --max-line-length=88 --show-source --statistics
+
+      - name: Run isort
+        run: isort --check-only .
+
+      - name: Run mypy
+        run: |
           mkdir --parents --verbose .mypy_cache
-      - run: mypy --ignore-missing-imports --install-types --non-interactive .
-      - run: pytest . || true
-      - run: shopt -s globstar && pyupgrade --py36-plus **/*.py
-      - run: safety check
+          mypy --ignore-missing-imports --install-types --non-interactive .
+
+      - name: Run pytest
+        run: pytest . || true
+
+      - name: Run pypgrade
+        run: pyupgrade --py36-plus **/*.py
+
+      - name: Run safety check
+        run: safety check
