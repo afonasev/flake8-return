@@ -14,7 +14,7 @@ jobs:
       - run: bandit --recursive .
       - run: black --check --line-length=79 --skip-string-normalization .
       - run: codespell
-      - run: flake8 . --count --max-complexity=10 --max-line-length=88 --show-source --statistics
+      - run: flake8 . --count --statistics
       - run: isort --check-only .
       - run: |
           pip install setuptools --editable . || true

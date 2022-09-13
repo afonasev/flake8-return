@@ -40,7 +40,7 @@ unnecessary_assign = (
         print(a)
         return a
     """,
-    # Incorrect false positives - can be refactored
+    # Can be refactored false positives
     """
     # https://github.com/afonasev/flake8-return/issues/47#issuecomment-1122571066
     def get_bar_if_exists(obj):
@@ -164,7 +164,7 @@ error_not_exists = (
         return foo
     """,
     # Refactored incorrect false positives
-    # See test cases above marked: "Incorrect false positives - can be refactored"
+    # See test cases above marked: "Can be refactored false positives"
     """
     # https://github.com/afonasev/flake8-return/issues/47#issuecomment-1122571066
     def get_bar_if_exists(obj):
