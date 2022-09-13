@@ -13,11 +13,15 @@ from .errors import (
 from .utils import is_false, is_none
 
 NameToLines = Dict[str, List[int]]
+BlockPosition = Dict[int, int]
 Function = Union[ast.AsyncFunctionDef, ast.FunctionDef]
+Loop = Union[ast.For, ast.AsyncFor, ast.While]
 
 ASSIGNS = 'assigns'
 REFS = 'refs'
 RETURNS = 'returns'
+TRIES = 'tries'
+LOOPS = 'loops'
 
 
 class UnnecessaryAssignMixin(Visitor):
@@ -33,6 +37,14 @@ class UnnecessaryAssignMixin(Visitor):
     def refs(self) -> NameToLines:
         return self._stack[-1][REFS]
 
+    @property
+    def tries(self) -> BlockPosition:
+        return self._stack[-1][TRIES]
+
+    @property
+    def loops(self) -> BlockPosition:
+        return self._stack[-1][LOOPS]
+
     def visit_For(self, node: ast.For) -> None:
         self._visit_loop(node)
 
@@ -42,7 +54,7 @@ class UnnecessaryAssignMixin(Visitor):
     def visit_While(self, node: ast.While) -> None:
         self._visit_loop(node)
 
-    def _visit_loop(self, node: ast.AST) -> None:
+    def _visit_loop(self, node: Loop) -> None:
         self._loop_count += 1
         self.generic_visit(node)
         self._loop_count -= 1
@@ -193,7 +205,13 @@ class ReturnVisitor(
 
     def _visit_with_stack(self, node: Function) -> None:
         self._stack.append(
-            {ASSIGNS: defaultdict(list), REFS: defaultdict(list), RETURNS: []}
+            {
+                ASSIGNS: defaultdict(list),
+                REFS: defaultdict(list),
+                TRIES: defaultdict(int),
+                LOOPS: defaultdict(int),
+                RETURNS: [],
+            }
         )
         self.generic_visit(node)
         self._check_function(node)
