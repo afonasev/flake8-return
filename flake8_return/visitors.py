@@ -1,4 +1,5 @@
 import ast
+import sys
 from collections import defaultdict
 from typing import Any, Dict, List, Optional, Union
 
@@ -55,9 +56,15 @@ class UnnecessaryAssignMixin(Visitor):
         self._visit_loop(node)
 
     def _visit_loop(self, node: Loop) -> None:
-        self._loop_count += 1
-        self.generic_visit(node)
-        self._loop_count -= 1
+        if sys.version_info >= (3, 8):
+            if self._stack:
+                if hasattr(node, "end_lineno") and node.end_lineno is not None:
+                    self.loops[node.lineno] = node.end_lineno
+            self.generic_visit(node)
+        else:
+            self._loop_count += 1
+            self.generic_visit(node)
+            self._loop_count -= 1
 
     def visit_Assign(self, node: ast.Assign) -> None:
         if not self._stack:
@@ -81,15 +88,23 @@ class UnnecessaryAssignMixin(Visitor):
         if self._stack:
             self.refs[node.id].append(node.lineno)
 
+    def visit_Try(self, node: ast.Try) -> None:
+        if sys.version_info >= (3, 8):
+            if self._stack:
+                if hasattr(node, "end_lineno") and node.end_lineno is not None:
+                    self.tries[node.lineno] = node.end_lineno
+        self.generic_visit(node)
+
     def _visit_assign_target(self, node: ast.AST) -> None:
         if isinstance(node, ast.Tuple):
             for n in node.elts:
                 self._visit_assign_target(n)
             return
 
-        if not self._loop_count and isinstance(node, ast.Name):
-            self.assigns[node.id].append(node.lineno)
-            return
+        if sys.version_info >= (3, 8) or not self._loop_count:
+            if isinstance(node, ast.Name):
+                self.assigns[node.id].append(node.lineno)
+                return
 
         # get item, etc.
         self.generic_visit(node)
@@ -111,7 +126,23 @@ class UnnecessaryAssignMixin(Visitor):
         if self._has_refs_before_next_assign(var_name, return_lineno):
             return
 
+        if sys.version_info >= (3, 8):
+            if self._has_refs_or_assigns_within_try_or_loop(var_name):
+                return
+
         self.error_from_node(UnnecessaryAssign, node)
+
+    def _has_refs_or_assigns_within_try_or_loop(self, var_name: str) -> bool:
+        for item in [*self.refs[var_name], *self.assigns[var_name]]:
+            for try_start, try_end in self.tries.items():
+                if try_start < item <= try_end:
+                    return True
+
+            for loop_start, loop_end in self.loops.items():
+                if loop_start < item <= loop_end:
+                    return True
+
+        return False
 
     def _has_refs_before_next_assign(
         self, var_name: str, return_lineno: int
