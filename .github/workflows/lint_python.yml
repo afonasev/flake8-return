@@ -20,6 +20,6 @@ jobs:
           pip install setuptools --editable . || true
           mkdir --parents --verbose .mypy_cache
       - run: mypy --ignore-missing-imports --install-types --non-interactive .
-      - run: pytest . || true
+      - run: pytest .
       - run: shopt -s globstar && pyupgrade --py36-plus **/*.py
       - run: safety check
