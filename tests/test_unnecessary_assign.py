@@ -40,29 +40,25 @@ unnecessary_assign = (
         print(a)
         return a
     """,
-
     # Incorrect false positives - can be refactored
-
-    # https://github.com/afonasev/flake8-return/issues/47#issuecomment-1122571066
     """
+    # https://github.com/afonasev/flake8-return/issues/47#issuecomment-1122571066
     def get_bar_if_exists(obj):
         result = ""
         if hasattr(obj, "bar"):
             result = str(obj.bar)
         return result
     """,
-
-    # https://github.com/afonasev/flake8-return/issues/47#issue-641117366
     """
+    # https://github.com/afonasev/flake8-return/issues/47#issue-641117366
     def x():
         formatted = _USER_AGENT_FORMATTER.format(format_string, **values)
         # clean up after any blank components
         formatted = formatted.replace('()', '').replace('  ', ' ').strip()
         return formatted
     """,
-
-    # https://github.com/afonasev/flake8-return/issues/47#issue-641117366
     """
+    # https://github.com/afonasev/flake8-return/issues/47#issue-641117366
     def user_agent_username(username=None):
 
         if not username:
@@ -148,10 +144,9 @@ error_not_exists = (
             i = i - x
         return val
     """,
-
     # Test cases for using value for assignment then returning it
-    # See:https://github.com/afonasev/flake8-return/issues/47
     """
+    # See:https://github.com/afonasev/flake8-return/issues/47
     def resolve_from_url(self, url: str) -> dict:
         local_match = self.local_scope_re.match(url)
         if local_match:
@@ -168,28 +163,24 @@ error_not_exists = (
         my_dict["foo_result"] = foo
         return foo
     """,
-
     # Refactored incorrect false positives
     # See test cases above marked: "Incorrect false positives - can be refactored"
-
-    # https://github.com/afonasev/flake8-return/issues/47#issuecomment-1122571066
     """
+    # https://github.com/afonasev/flake8-return/issues/47#issuecomment-1122571066
     def get_bar_if_exists(obj):
         if hasattr(obj, "bar"):
             return str(obj.bar)
         return ""
     """,
-
-    # https://github.com/afonasev/flake8-return/issues/47#issue-641117366
     """
+    # https://github.com/afonasev/flake8-return/issues/47#issue-641117366
     def x():
         formatted = _USER_AGENT_FORMATTER.format(format_string, **values)
         # clean up after any blank components
         return formatted.replace('()', '').replace('  ', ' ').strip()
     """,
-
-    # https://github.com/afonasev/flake8-return/issues/47#issue-641117366
     """
+    # https://github.com/afonasev/flake8-return/issues/47#issue-641117366
     def user_agent_username(username=None):
 
         if not username:
