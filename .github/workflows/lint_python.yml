@@ -12,14 +12,14 @@ jobs:
       - run: pip install bandit black codespell flake8 flake8-bugbear
                          flake8-comprehensions isort mypy pytest pyupgrade safety
       - run: bandit --recursive .
-      - run: black --check . || true
+      - run: black --check --line-length=79 --skip-string-normalization .
       - run: codespell
-      - run: flake8 . --count --max-complexity=10 --max-line-length=88 --show-source --statistics
+      - run: flake8 . --count --statistics
       - run: isort --check-only .
       - run: |
           pip install setuptools --editable . || true
           mkdir --parents --verbose .mypy_cache
       - run: mypy --ignore-missing-imports --install-types --non-interactive .
-      - run: pytest . || true
+      - run: pytest .
       - run: shopt -s globstar && pyupgrade --py36-plus **/*.py
       - run: safety check
