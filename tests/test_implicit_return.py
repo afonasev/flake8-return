@@ -100,6 +100,41 @@ error_not_exists = (
             return 1
         assert False, 'Sanity check'
     """,
+    # return value within loop
+    """
+    def bar1(x, y, z):
+        for i in x:
+            if i > y:
+                break
+            return z
+    """,
+    """
+    def bar3(x, y, z):
+        for i in x:
+            if i > y:
+                if z:
+                    break
+            else:
+                return z
+            return None
+    """,
+        """
+    def bar1(x, y, z):
+        for i in x:
+            if i < y:
+                continue
+            return z
+    """,
+    """
+    def bar3(x, y, z):
+        for i in x:
+            if i < y:
+                if z:
+                    continue
+            else:
+                return z
+            return None
+    """,
 )
 
 
