@@ -77,17 +77,6 @@ def test_superfluous_else_break(src):
 
 error_not_exists = (
     """
-    def bar4(x):
-        for i in range(10):
-            if x:  # [no-else-break]
-                break
-            else:
-                try:
-                    return
-                except ValueError:
-                    break
-    """,
-    """
     def bar1(x, y, z):
         for i in x:
             if i > y:
