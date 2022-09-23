@@ -201,7 +201,7 @@ class ImplicitReturnMixin(Visitor):
             self._check_implicit_return(last_node.orelse[-1])
             return
 
-        if isinstance(last_node, (ast.With, ast.AsyncWith)):
+        if isinstance(last_node, (ast.With, ast.AsyncWith, ast.For)):
             self._check_implicit_return(last_node.body[-1])
             return
 
