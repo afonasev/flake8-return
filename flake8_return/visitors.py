@@ -256,7 +256,7 @@ class SuperfluousReturnMixin(Visitor):
             if any(isinstance(node, statement) for node in node.body):
                 message = getattr(error, "message", "")
                 message = self._updated_error_message(message, check)
-                setattr(error, "message", message)
+                setattr(error, "message", message)  # noqa: B010
                 self.error_from_node(error, node)
                 return True
 
