@@ -1,7 +1,7 @@
 import pytest
 from flake8_plugin_utils import assert_error
 
-from flake8_return.errors import SuperfluousElifReturn
+from flake8_return.errors import SuperfluousElseReturn
 from flake8_return.visitors import ReturnVisitor
 
 from . import ids
@@ -38,4 +38,4 @@ superfluous_elif = (
 
 @pytest.mark.parametrize('src', superfluous_elif, ids=ids(superfluous_elif))
 def test_superfluous_elif_return(src):
-    assert_error(ReturnVisitor, src, SuperfluousElifReturn)
+    assert_error(ReturnVisitor, src, SuperfluousElseReturn)
