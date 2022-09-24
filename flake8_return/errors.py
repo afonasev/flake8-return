@@ -36,15 +36,15 @@ class SuperfluousElseReturn(Error):
 
 
 class SuperfluousElseRaise(Error):
-    code = 'R507'
+    code = 'R506'
     message = 'unnecessary else after raise statement.'
 
 
 class SuperfluousElseContinue(Error):
-    code = 'R509'
+    code = 'R507'
     message = 'unnecessary else after continue statement.'
 
 
 class SuperfluousElseBreak(Error):
-    code = 'R511'
+    code = 'R508'
     message = 'unnecessary else after break statement.'
