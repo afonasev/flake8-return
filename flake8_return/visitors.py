@@ -8,6 +8,10 @@ from flake8_plugin_utils import Visitor
 from .errors import (
     ImplicitReturn,
     ImplicitReturnValue,
+    SuperfluousElseBreak,
+    SuperfluousElseContinue,
+    SuperfluousElseRaise,
+    SuperfluousElseReturn,
     UnnecessaryAssign,
     UnnecessaryReturnNone,
 )
@@ -23,6 +27,8 @@ REFS = 'refs'
 RETURNS = 'returns'
 TRIES = 'tries'
 LOOPS = 'loops'
+IFS = 'ifs'
+ELIFS = 'elifs'
 
 
 class UnnecessaryAssignMixin(Visitor):
@@ -214,7 +220,68 @@ class ImplicitReturnMixin(Visitor):
             self.error_from_node(ImplicitReturn, last_node)
 
 
+class SuperfluousReturnMixin(Visitor):
+    superfluous_list = [
+        (ast.Return, SuperfluousElseReturn),
+        (ast.Break, SuperfluousElseBreak),
+        (ast.Raise, SuperfluousElseRaise),
+        (ast.Continue, SuperfluousElseContinue),
+    ]
+
+    @property
+    def ifs(self) -> List[ast.If]:
+        if len(self._stack) > 0:
+            return self._stack[-1][IFS]
+        return []
+
+    @property
+    def elifs(self) -> List[ast.If]:
+        return self._stack[-1][ELIFS]
+
+    def visit_If(self, node: ast.If) -> None:
+        if len(node.orelse) == 1 and isinstance(node.orelse[0], ast.If):
+            self.elifs.append(node)
+        else:
+            self.ifs.append(node)
+
+        self.generic_visit(node)
+
+    def _updated_error_message(self, message, check) -> str:
+        message = message.replace("else", "[check]")
+        message = message.replace("elif", "[check]")
+        return message.replace("[check]", check)
+
+    def _check_superfluous_else_node(self, node: ast.If, check: str) -> bool:
+        for statement, error in self.superfluous_list:
+            if any(isinstance(node, statement) for node in node.body):
+                error.message = self._updated_error_message(
+                    error.message, check
+                )
+                self.error_from_node(error, node)
+                return True
+
+        return False
+
+    def _check_superfluous_else(self) -> bool:
+        for node in self.ifs:
+            if not node.orelse:
+                continue
+
+            if self._check_superfluous_else_node(node, "else"):
+                return True
+
+        return False
+
+    def _check_superfluous_elif(self) -> bool:
+        for node in self.elifs:
+            if self._check_superfluous_else_node(node, "elif"):
+                return True
+
+        return False
+
+
 class ReturnVisitor(
+    SuperfluousReturnMixin,
     UnnecessaryAssignMixin,
     UnnecessaryReturnNoneMixin,
     ImplicitReturnMixin,
@@ -242,6 +309,8 @@ class ReturnVisitor(
                 TRIES: defaultdict(int),
                 LOOPS: defaultdict(int),
                 RETURNS: [],
+                IFS: [],
+                ELIFS: [],
             }
         )
         self.generic_visit(node)
@@ -253,6 +322,8 @@ class ReturnVisitor(
         self.generic_visit(node)
 
     def _check_function(self, node: Function) -> None:
+        if self._check_superfluous_elif() or self._check_superfluous_else():
+            return
         if not self.returns or not node.body:
             return
 
