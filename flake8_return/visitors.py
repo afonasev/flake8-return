@@ -1,33 +1,23 @@
 import ast
 from collections import defaultdict
-from typing import Any, Dict, List, Union
+from typing import Any, List, Union
 
 from flake8_plugin_utils import Visitor
 
 from .errors import (
     ImplicitReturn,
-    ImplicitReturnValue,
     SuperfluousElseBreak,
     SuperfluousElseContinue,
     SuperfluousElseRaise,
     SuperfluousElseReturn,
 )
+from .mixins.implicit_return_value import ImplicitReturnValueMixin
 from .mixins.unnecessary_assign import UnnecessaryAssignMixin
 from .mixins.unnecessary_return_none import UnnecessaryReturnNoneMixin
 from .stack_keys import ASSIGNS, ELIFS, IFS, LOOPS, REFS, RETURNS, TRIES
 from .utils import is_false, is_none
 
-NameToLines = Dict[str, List[int]]
-BlockPosition = Dict[int, int]
 Function = Union[ast.AsyncFunctionDef, ast.FunctionDef]
-Loop = Union[ast.For, ast.AsyncFor, ast.While]
-
-
-class ImplicitReturnValueMixin(Visitor):
-    def _check_implicit_return_value(self) -> None:
-        for node in self.returns:
-            if not node.value:
-                self.error_from_node(ImplicitReturnValue, node)
 
 
 class ImplicitReturnMixin(Visitor):
