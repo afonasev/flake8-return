@@ -15,20 +15,13 @@ from .errors import (
     UnnecessaryAssign,
     UnnecessaryReturnNone,
 )
+from .stack_keys import ASSIGNS, ELIFS, IFS, LOOPS, REFS, RETURNS, TRIES
 from .utils import is_false, is_none
 
 NameToLines = Dict[str, List[int]]
 BlockPosition = Dict[int, int]
 Function = Union[ast.AsyncFunctionDef, ast.FunctionDef]
 Loop = Union[ast.For, ast.AsyncFor, ast.While]
-
-ASSIGNS = 'assigns'
-REFS = 'refs'
-RETURNS = 'returns'
-TRIES = 'tries'
-LOOPS = 'loops'
-IFS = 'ifs'
-ELIFS = 'elifs'
 
 
 class UnnecessaryAssignMixin(Visitor):
