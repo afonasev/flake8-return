@@ -11,9 +11,9 @@ from .errors import (
     SuperfluousElseContinue,
     SuperfluousElseRaise,
     SuperfluousElseReturn,
-    UnnecessaryReturnNone,
 )
 from .mixins.unnecessary_assign import UnnecessaryAssignMixin
+from .mixins.unnecessary_return_none import UnnecessaryReturnNoneMixin
 from .stack_keys import ASSIGNS, ELIFS, IFS, LOOPS, REFS, RETURNS, TRIES
 from .utils import is_false, is_none
 
@@ -21,13 +21,6 @@ NameToLines = Dict[str, List[int]]
 BlockPosition = Dict[int, int]
 Function = Union[ast.AsyncFunctionDef, ast.FunctionDef]
 Loop = Union[ast.For, ast.AsyncFor, ast.While]
-
-
-class UnnecessaryReturnNoneMixin(Visitor):
-    def _check_unnecessary_return_none(self) -> None:
-        for node in self.returns:
-            if is_none(node.value):
-                self.error_from_node(UnnecessaryReturnNone, node)
 
 
 class ImplicitReturnValueMixin(Visitor):
