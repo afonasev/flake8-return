@@ -246,7 +246,7 @@ class SuperfluousReturnMixin(Visitor):
 
         self.generic_visit(node)
 
-    def _updated_error_message(self, message, check) -> str:
+    def _updated_error_message(self, message: str, check: str) -> str:
         message = message.replace("else", "[check]")
         message = message.replace("elif", "[check]")
         return message.replace("[check]", check)
@@ -254,9 +254,9 @@ class SuperfluousReturnMixin(Visitor):
     def _check_superfluous_else_node(self, node: ast.If, check: str) -> bool:
         for statement, error in self.superfluous_list:
             if any(isinstance(node, statement) for node in node.body):
-                error.message = self._updated_error_message(
-                    error.message, check
-                )
+                message = getattr(error, "message", "")
+                message = self._updated_error_message(message, check)
+                setattr(error, "message", message)
                 self.error_from_node(error, node)
                 return True
 
