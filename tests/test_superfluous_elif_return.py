@@ -33,6 +33,25 @@ superfluous_elif = (
             c = 3
         return
     """,
+    """
+    def foo2(x, y, w, z):
+        if x:
+            a = 1
+        elif z:
+            b = 2
+        else:
+            c = 3
+
+        if x:  # [no-else-return]
+            a = 1
+            return y
+        elif z:
+            b = 2
+            return w
+        else:
+            c = 3
+            return z
+    """
 )
 
 
