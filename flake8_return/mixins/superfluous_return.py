@@ -28,7 +28,9 @@ class SuperfluousReturnMixin(Visitor):
 
     @property
     def elifs(self) -> List[ast.If]:
-        return self._stack[-1][ELIFS]
+        if len(self._stack) >0:
+            return self._stack[-1][ELIFS]
+        return []
 
     def visit_If(self, node: ast.If) -> None:
         if len(node.orelse) == 1 and isinstance(node.orelse[0], ast.If):
