@@ -51,7 +51,7 @@ superfluous_elif = (
         else:
             c = 3
             return z
-    """
+    """,
 )
 
 
