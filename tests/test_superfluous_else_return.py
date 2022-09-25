@@ -98,6 +98,16 @@ error_not_exists = (
             return z
         return None
     """,
+    """
+    x = 0
+
+    if x == 1:
+        y = "a"
+    elif x == 2:
+        y = "b"
+    else:
+        y = "c"
+    """,
 )
 
 
