@@ -74,30 +74,30 @@ def test_superfluous_else_return(src):
 
 error_not_exists = (
     """
-def bar1(x, y, z):
-    if x:
-        return y
-    return z
-""",
-    """
-def bar2(w, x, y, z):
-    if x:
-        return y
-    if z:
-        a = 1
-    else:
-        return w
-    return None
-""",
-    """
-def bar3(x, y, z):
-    if x:
-        if z:
+    def bar1(x, y, z):
+        if x:
             return y
-    else:
         return z
-    return None
-""",
+    """,
+    """
+    def bar2(w, x, y, z):
+        if x:
+            return y
+        if z:
+            a = 1
+        else:
+            return w
+        return None
+    """,
+    """
+    def bar3(x, y, z):
+        if x:
+            if z:
+                return y
+        else:
+            return z
+        return None
+    """,
 )
 
 
