@@ -201,14 +201,15 @@ if sys.version_info >= (3, 8):
 
                 username = username.replace(' ', '_')  # Avoid spaces or %20.
                 try:
-                    username.encode('ascii')  # just test, but not actually use it
+                    username.encode('ascii')  # just test,
+                                              # but not actually use it
                 except UnicodeEncodeError:
                     username = quote(username.encode('utf-8'))
                 else:
                     # % is legal in the default $wgLegalTitleChars
                     # This is so that ops know the real pywikibot will not
-                    # allow a useragent in the username to allow through a hand-coded
-                    # percent-encoded value.
+                    # allow a useragent in the username to allow through a
+                    # hand-coded percent-encoded value.
                     if '%' in username:
                         username = quote(username)
                 return username
@@ -271,14 +272,15 @@ else:
 
                 username = username.replace(' ', '_')  # Avoid spaces or %20.
                 try:
-                    username.encode('ascii')  # just test, but not actually use it
+                    username.encode('ascii')  # just test,
+                                              # but not actually use it
                 except UnicodeEncodeError:
                     username = quote(username.encode('utf-8'))
                 else:
                     # % is legal in the default $wgLegalTitleChars
                     # This is so that ops know the real pywikibot will not
-                    # allow a useragent in the username to allow through a hand-coded
-                    # percent-encoded value.
+                    # allow a useragent in the username to allow through a
+                    # hand-coded percent-encoded value.
                     if '%' in username:
                         return quote(username)
                 finally:
