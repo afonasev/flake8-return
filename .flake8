@@ -1,0 +1,10 @@
+[flake8]
+enable-extensions = G
+exclude = .git, .venv, env
+ignore =
+	A003 ; 'id' is a python builtin, consider renaming the class attribute
+	W503 ; line break before binary operator
+	N802 ; function name 'visit_FunctionDef' should be lowercase
+max-complexity = 10
+max-line-length = 79
+show-source = true
