@@ -46,15 +46,6 @@ error_not_exists = (
     """,
     """
     def x(y):
-        if not y:
-            return 1
-        elif y - 10:
-            return 2
-        else:
-            return 3
-    """,
-    """
-    def x(y):
         for i in range(10):
             if i > 100:
                 return i

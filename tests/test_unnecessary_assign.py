@@ -193,97 +193,99 @@ if sys.version_info >= (3, 8):
     error_not_exists.extend(
         [
             """
-    # https://github.com/afonasev/flake8-return/issues/47#issue-641117366
-    def user_agent_username(username=None):
+            # https://github.com/afonasev/flake8-return/issues/47#issue-641117366
+            def user_agent_username(username=None):
 
-        if not username:
-            return ''
+                if not username:
+                    return ''
 
-        username = username.replace(' ', '_')  # Avoid spaces or %20.
-        try:
-            username.encode('ascii')  # just test, but not actually use it
-        except UnicodeEncodeError:
-            username = quote(username.encode('utf-8'))
-        else:
-            # % is legal in the default $wgLegalTitleChars
-            # This is so that ops know the real pywikibot will not
-            # allow a useragent in the username to allow through a hand-coded
-            # percent-encoded value.
-            if '%' in username:
-                username = quote(username)
-        return username
-    """,
+                username = username.replace(' ', '_')  # Avoid spaces or %20.
+                try:
+                    username.encode('ascii')  # just test,
+                                              # but not actually use it
+                except UnicodeEncodeError:
+                    username = quote(username.encode('utf-8'))
+                else:
+                    # % is legal in the default $wgLegalTitleChars
+                    # This is so that ops know the real pywikibot will not
+                    # allow a useragent in the username to allow through a
+                    # hand-coded percent-encoded value.
+                    if '%' in username:
+                        username = quote(username)
+                return username
+            """,
             """
-    # https://github.com/afonasev/flake8-return/issues/116#issue-1367575481
-    def no_exception_loop():
-        success = False
-        for _ in range(10):
-            try:
+            # https://github.com/afonasev/flake8-return/issues/116#issue-1367575481
+            def no_exception_loop():
+                success = False
+                for _ in range(10):
+                    try:
+                        success = True
+                    except Exception:
+                        print("exception")
+                return success
+            """,
+            """
+            # https://github.com/afonasev/flake8-return/issues/116#issue-1367575481
+            def no_exception():
+                success = False
+                try:
+                    success = True
+                except Exception:
+                    print("exception")
+                return success
+            """,
+            """
+            # https://github.com/afonasev/flake8-return/issues/116#issue-1367575481
+            def exception():
                 success = True
-            except Exception:
-                print("exception")
-        return success
-    """,
+                try:
+                    print("raising")
+                    raise Exception
+                except Exception:
+                    success = False
+                return success
+            """,
             """
-    # https://github.com/afonasev/flake8-return/issues/116#issue-1367575481
-    def no_exception():
-        success = False
-        try:
-            success = True
-        except Exception:
-            print("exception")
-        return success
-    """,
-            """
-    # https://github.com/afonasev/flake8-return/issues/116#issue-1367575481
-    def exception():
-        success = True
-        try:
-            print("raising")
-            raise Exception
-        except Exception:
-            success = False
-        return success
-    """,
-            """
-    # https://github.com/afonasev/flake8-return/issues/66
-    def close(self):
-        any_failed = False
-        for task in self.tasks:
-            try:
-                task()
-            except BaseException:
-                any_failed = True
-                report(traceback.format_exc())
-        return any_failed
-    """,
+            # https://github.com/afonasev/flake8-return/issues/66
+            def close(self):
+                any_failed = False
+                for task in self.tasks:
+                    try:
+                        task()
+                    except BaseException:
+                        any_failed = True
+                        report(traceback.format_exc())
+                return any_failed
+            """,
         ]
     )
 else:
     error_not_exists.extend(
         [
             """
-    # https://github.com/afonasev/flake8-return/issues/47#issue-641117366
-    def user_agent_username(username=None):
+            # https://github.com/afonasev/flake8-return/issues/47#issue-641117366
+            def user_agent_username(username=None):
 
-        if not username:
-            return ''
+                if not username:
+                    return ''
 
-        username = username.replace(' ', '_')  # Avoid spaces or %20.
-        try:
-            username.encode('ascii')  # just test, but not actually use it
-        except UnicodeEncodeError:
-            username = quote(username.encode('utf-8'))
-        else:
-            # % is legal in the default $wgLegalTitleChars
-            # This is so that ops know the real pywikibot will not
-            # allow a useragent in the username to allow through a hand-coded
-            # percent-encoded value.
-            if '%' in username:
-                return quote(username)
-        finally:
-            return username
-    """,
+                username = username.replace(' ', '_')  # Avoid spaces or %20.
+                try:
+                    username.encode('ascii')  # just test,
+                                              # but not actually use it
+                except UnicodeEncodeError:
+                    username = quote(username.encode('utf-8'))
+                else:
+                    # % is legal in the default $wgLegalTitleChars
+                    # This is so that ops know the real pywikibot will not
+                    # allow a useragent in the username to allow through a
+                    # hand-coded percent-encoded value.
+                    if '%' in username:
+                        return quote(username)
+                finally:
+                    return username
+            """,
         ]
     )
 

@@ -25,17 +25,8 @@ implicit_return = (
     def x(y):
         if not y:
             return 1
-        elif y - 100:
-            print()  # error
-        else:
-            return 2
-    """,
-    """
-    def x(y):
-        if not y:
-            return 1
-        else:
-            print()  # error
+
+        print()  # error
     """,
     # for
     """

@@ -55,6 +55,48 @@ def x():
     return a  # error!
 ```
 
+* R505 unnecessary else after return statement.
+
+```python
+def x(y, z):
+    if y:  # error!
+        return 1
+    else:
+        return z
+```
+
+* R506 unnecessary else after raise statement.
+
+```python
+def x(y, z):
+    if y:  # error!
+        raise Exception(y)
+    else:
+        raise Exception(z)
+```
+
+* R507 unnecessary else after continue statement.
+
+```python
+def x(y, z):
+    for i in y:
+        if i < z:  # error!
+            continue
+        else:
+            a = 0
+```
+
+* R508 unnecessary else after break statement.
+
+```python
+def x(y, z):
+    for i in y:
+        if i > z:  # error!
+            break
+        else:
+            a = 0
+```
+
 Returns in asyncio coroutines also supported.
 
 ## For developers
