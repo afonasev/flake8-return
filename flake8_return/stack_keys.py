@@ -1,0 +1,7 @@
+ASSIGNS = 'assigns'
+REFS = 'refs'
+RETURNS = 'returns'
+TRIES = 'tries'
+LOOPS = 'loops'
+IFS = 'ifs'
+ELIFS = 'elifs'

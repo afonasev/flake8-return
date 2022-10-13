@@ -25,17 +25,8 @@ implicit_return = (
     def x(y):
         if not y:
             return 1
-        elif y - 100:
-            print()  # error
-        else:
-            return 2
-    """,
-    """
-    def x(y):
-        if not y:
-            return 1
-        else:
-            print()  # error
+
+        print()  # error
     """,
     # for
     """
@@ -99,6 +90,41 @@ error_not_exists = (
         if not y:
             return 1
         assert False, 'Sanity check'
+    """,
+    # return value within loop
+    """
+    def bar1(x, y, z):
+        for i in x:
+            if i > y:
+                break
+            return z
+    """,
+    """
+    def bar3(x, y, z):
+        for i in x:
+            if i > y:
+                if z:
+                    break
+            else:
+                return z
+            return None
+    """,
+    """
+    def bar1(x, y, z):
+        for i in x:
+            if i < y:
+                continue
+            return z
+    """,
+    """
+    def bar3(x, y, z):
+        for i in x:
+            if i < y:
+                if z:
+                    continue
+            else:
+                return z
+            return None
     """,
 )
 
