@@ -113,7 +113,7 @@ Returns in asyncio coroutines also supported.
 
     make precommit
 
-### Run linters, autoformat, tests etc.
+### Run linters, autoformat, tests etc
 
     make pretty lint test
 
@@ -129,6 +129,28 @@ Unreleased
 -----
 
 * ...
+
+1.2.0 - 2022-10-28
+-----
+
+* Port no-else-break, no-else-continue, no-else-raise, no-else-return from pylint (#122) Calum Young
+* PEP 621: Migrate more config to pyproject.toml (#123) Christian Clauss
+* Fix/116/R504-try-except (#120) Calum Young
+* Update ci (#119) Calum Young
+* Fix/47/Update-R504-for-assignment-value (#117) Calum Young
+* Upgrade GitHub Actions (#113) Christian Clauss
+* Add a space to avoid a typo in R503 (#98) Christian Clauss
+* GitHub Action to lint Python code (#97) Christian Clauss
+* Typo fixes (#92) Aarni Koskela
+* Create codeql-analysis.yml Afonasev Evgeniy
+* Bump flake8-plugin-utils from 1.1.1 to 1.3.2 (#87) dependabot
+* Bump mypy from 0.812 to 0.971 (#114) dependabot
+* Bump pytest-cov from 3.0.0 to 4.0.0 (#124) dependabot
+* Bump pytest-cov from 2.11.1 to 3.0.0 (#102) dependabot
+* Bump pytest-mock from 3.6.0 to 3.6.1 (#91) dependabot
+* Bump pytest from 6.2.4 to 6.2.5 (#99) dependabot
+* Bump pylint from 2.8.2 to 2.10.2 (#100) dependabot
+* Bump pytest from 6.2.3 to 6.2.4 (#86) dependabot
 
 1.1.3 - 2021-05-05
 -----
