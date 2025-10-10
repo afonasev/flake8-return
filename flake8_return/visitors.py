@@ -26,7 +26,9 @@ class ReturnVisitor(
 
     @property
     def returns(self) -> List[ast.Return]:
-        return self._stack[-1][RETURNS]
+        if self._stack:
+            return self._stack[-1][RETURNS]
+        return []
 
     def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
         self._visit_with_stack(node)
