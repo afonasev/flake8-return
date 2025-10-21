@@ -28,6 +28,21 @@ class ImplicitReturnMixin(Visitor):
         if isinstance(last_node, ast.Assert) and is_false(last_node.test):
             return
 
+        if isinstance(last_node, ast.Match):
+            # We need at least one catch-all case, otherwise we'll consider
+            # the match to be non-exhaustive and therefore fail the linter
+            if not any(
+                isinstance(case.pattern, ast.MatchAs)
+                and not case.pattern.pattern
+                for case in last_node.cases
+            ):
+                self.error_from_node(ImplicitReturn, last_node)
+
+            # Every entry of the match statement must have an explicit return
+            for case in last_node.cases:
+                self._check_implicit_return(case.body[-1])
+            return
+
         if not isinstance(
             last_node, (ast.Return, ast.Raise, ast.While, ast.Try)
         ):

@@ -43,6 +43,20 @@ implicit_return = (
                 return i
         else:
             print()  # error
+    """
+    """
+    def x(y):
+        match y:
+            case _:
+                ...
+        # error
+    """,
+    """
+    def x(y):
+        match y:
+            case 1:
+                return 1+1
+        # error
     """,
 )
 
@@ -125,6 +139,12 @@ error_not_exists = (
             else:
                 return z
             return None
+    """,
+    """
+    def x(y):
+        match y:
+            case _:
+                return 1+1
     """,
 )
 
